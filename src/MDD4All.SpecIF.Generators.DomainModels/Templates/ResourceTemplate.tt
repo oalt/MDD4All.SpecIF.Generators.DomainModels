@@ -1,0 +1,63 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MDD4All.SpecIF.DataModels" #>
+<#@ import namespace="MDD4All.SpecIF.Generators.DomainModels" #>
+using MDD4All.SpecIF.DataFactory;
+using SPECIF_DATA_MODELS = MDD4All.SpecIF.DataModels;
+using MDD4All.SpecIF.DomainModels.Base;
+
+namespace <#=NamespaceBase#>.Resources<#=DotNetNamespacePostfix#>
+{
+    public class <#= ResourceTitleWithoutNamespace #> : SpecIfResource
+    {
+        public <#= ResourceTitleWithoutNamespace #>() : base()
+        {
+            
+        }
+
+        public <#= ResourceTitleWithoutNamespace #>(SPECIF_DATA_MODELS.Resource resource) : base()
+        {
+            // TODO initialize properties
+        }
+
+<#  
+foreach(PropertyDataContext propertyContext in PropertyDataContexts)
+{
+#>
+        public Properties<#=propertyContext.DotNetNamespacePostfix #>.<#=propertyContext.Title #> <#=propertyContext.Title #> { get; set; } = new Properties<#=propertyContext.DotNetNamespacePostfix #>.<#=propertyContext.Title #>();
+<#
+}#>
+
+        public override SPECIF_DATA_MODELS.Key Class
+        {
+            get
+            {
+                return new SPECIF_DATA_MODELS.Key("<#=_resourceClass.ID #>", "<#=_resourceClass.Revision #>");
+            }
+        }
+
+        public override SPECIF_DATA_MODELS.Resource Resource 
+        { 
+            get
+            {
+                SPECIF_DATA_MODELS.Resource result = SpecIfDataFactory.CreateResource(Class);
+
+<#  
+foreach(PropertyDataContext propertyContext in PropertyDataContexts)
+{#>
+                if(<#=propertyContext.Title #>.HasValue)
+                {
+                    result.Properties.Add(<#=propertyContext.Title #>.Property);
+                }
+<#
+}
+#>
+
+                return result;
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+using MDD4All.SpecIF.DomainModels.Base;
+
+namespace <#=PropertyDataContext.NamespaceBase#>.Properties<#=PropertyDataContext.DotNetNamespacePostfix#>
+{
+    public class <#=PropertyDataContext.Title#> : SpecIfSingleEnumerationProperty
+    {
+
+    }
+}
