@@ -94,7 +94,7 @@ namespace MDD4All.SpecIF.Generators.DomainModels
                     System.IO.File.WriteAllText(propertyDirectoryPath + propertyDataContext.PropertyClassTitleWithoutNamespace + ".cs", code);
 
                 }
-                else if(dataType.Type == "xs:string" && (dataType.Enumeration != null))
+                else if(dataType.Type == "xs:string" && (dataType.Enumeration != null)) // enumeration
                 {
                     if(propertyClass.Multiple == true)
                     {

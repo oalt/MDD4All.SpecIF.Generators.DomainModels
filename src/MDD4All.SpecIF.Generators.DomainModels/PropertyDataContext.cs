@@ -44,5 +44,7 @@ namespace MDD4All.SpecIF.Generators.DomainModels
             //    return result;
             //}
         }
+
+        public Key DataTypeKey { get; set; }
     }
 }

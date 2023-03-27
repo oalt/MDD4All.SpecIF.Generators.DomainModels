@@ -79,7 +79,8 @@ namespace MDD4All.SpecIF.Generators.DomainModels.Templates
                         NamespaceBase= NamespaceBase,
                         DotNetNamespacePostfix = propertyNamespacePostfix,
                         NamespaceParts = propertyNamespaceParts,
-                        PropertyClassTitleWithoutNamespace = new string(propertyTitleLetters)
+                        PropertyClassTitleWithoutNamespace = new string(propertyTitleLetters),
+                        DataTypeKey = propertyClass.DataType
                     };
 
                     PropertyDataContexts.Add(propertyDataContext);
